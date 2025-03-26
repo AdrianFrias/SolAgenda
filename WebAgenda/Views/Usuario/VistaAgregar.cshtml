@@ -1,0 +1,63 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AgregarUsuario</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.js"></script>
+</head>
+<body>
+    <div class="container">
+        @if (TempData["error"] != null)
+        {
+            <h3 class="alert alert-danger">
+                @TempData["error"]
+            </h3>
+        }
+        @if (TempData["mensaje"] != null)
+        {
+            <h3 class="alert alert-success">
+                @TempData["mensaje"]
+            </h3>
+        }
+    <form action="/Usuario/AgregarUsuario" method="post" enctype="multipart/form-data">
+        <label>Nombre(s)</label>
+        @Html.TextBox("Nombres", null, new { required = "required", placeholder = "Nombres" })
+        <br />
+        <label>Apellido</label>
+        @Html.TextBox("Paterno", null, new { required = "required", placeholder = "Paterno" })
+        <br />
+        <label>Apellido</label>
+        @Html.TextBox("Materno", null, new { required = "required", placeholder = "Materno" })
+        <br />
+        <label>Correo electronico</label>
+        @Html.TextBox("Correo", null, new { type = "email",required = "required", placeholder = "@example.com" })
+        <br />
+        <label>Nombre de usuario</label>
+        @Html.TextBox("NickName", null, new { required = "required", placeholder = "NickName" })
+        <br />
+        <label>Password</label>
+        @Html.TextBox("Password", null, new { required = "required", placeholder = "Tu contraseña debe ser de tener 5 caracteres" })
+        <br />
+        <label>Verifica Password</label>
+        @Html.TextBox("Password", null, new { required = "required" })
+        <br />
+        <label>Foto</label>
+        @Html.TextBox("FileFoto", null, new { type = "file", @class = "form-control", required = "required" })
+        <br />
+        <label>Telefono</label>
+        @Html.TextBox("Telefono", null, new { required = "required" })
+        <br />
+        <input class="btn btn-dark" type="submit" value="Guardar" />
+        <a class="btn btn-dark" href="/Usuario/Login">Cancelar</a>
+
+    </form>
+    </div>
+</body>
+</html>

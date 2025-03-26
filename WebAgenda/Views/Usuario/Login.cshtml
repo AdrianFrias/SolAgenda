@@ -1,0 +1,44 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>View</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.js"></script>
+</head>
+<body>
+    <div>
+        @if (TempData["error"] != null)
+        {
+            <h3>
+                @TempData["error"]
+            </h3>
+        }
+        @if (TempData["mensaje"] != null)
+        {
+            <h3 class="alert alert-success">
+                @TempData["mensaje"]
+            </h3>
+        }
+        <!--Por default un form es un metodo post-->
+        <form>
+            <label>Usuario</label>
+            <input type="text" name="NickName" placeholder="Nombre" />
+            <br />
+            <label>Contraseña</label>
+            <input type="text" name="Password" placeholder="Contraseña" />
+            <!--El action se puede poner dentro del input-->
+            <br />
+            <input class="btn btn-dark" type="submit" value="Entrar" formaction="/Usuario/ValidarCredenciales" />
+            <br />
+            <a href="/Usuario/VistaUsuario">Agregar usuario</a>
+        </form>
+    </div>
+</body>
+</html>
