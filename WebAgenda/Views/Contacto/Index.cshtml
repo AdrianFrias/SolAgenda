@@ -1,32 +1,32 @@
 ﻿@using DataAgenda.Modelo;
-@model Usuario
+@model List<Contacto>
 @{
     ViewBag.Title = "Index";
 }
-<img src="~/FotosUsuarios/@Model.Foto" width="170" style="float:right">
+<img src="~/FotosUsuarios/ViewBag.FotoUsuario" width="170" style="float:right">
 
 <a href="/Contacto/IrCrearContacto">Crear nuevo contacto</a>
 
 <h2 style="text-align:center">Tus contactos</h2>
-Tienes @Model.Contacto.Count contactos almacenados
+Tienes @Model.Count contactos almacenados
 <br />
 Buscador
 <br />
 <br />
 <hr />
 
-@foreach (Contacto contacto in Model.Contacto)
+@foreach (Contacto contacto in Model)
 {
 
     <div class="mb-3 col-4">
         <div class="card">
             <div class="row">
                 <!-- Columna de la imagen -->
-                <div class="col-4">
+                <div class="col-5">
                     <img src="~/FotosContactos/@contacto.Foto" style="height:170px; width:170px" />
                 </div>
                 <!-- Columna del texto -->
-                <div class="col-8">
+                <div class="col-7">
                     <div class="card-body">
                         <p>Nombre:@contacto.Nombre @contacto.ApPaterno @contacto.ApMaterno</p>
                         <p>Edad:@contacto.Edad</p>
