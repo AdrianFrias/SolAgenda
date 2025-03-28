@@ -1,0 +1,59 @@
+﻿@using DataAgenda.Modelo
+
+@model List<Intermedio>
+
+@{
+    ViewBag.Title = "MediosContacto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>MediosContacto</h2>
+
+<form action="/Contacto/AgregarMediodeContacto" method="post">
+
+    <input type="hidden" name="contactoId" value="@ViewBag.contactoId" />
+
+    <label>Tipo de contacto</label>
+    @Html.DropDownList("MediosDeContactoId", new SelectList(ViewBag.catalogoMediosContacto, "Id", "Nombre"), "Seleccione una opción", new { @class = "form-control" })
+
+    <label>Info de Contacto</label>
+    <input type="text" name="Informacion" />
+
+    <input type="submit" value="Registrar" />
+
+</form>
+
+@*@foreach (Datos_Agenda.Model.Intermedia dato in Model)
+    {
+        <h1>Medios de contacto</h1>
+        <label>Medio de contacto</label>
+        <input type="text" value="@dato.MediosDeContacto" readonly />
+        <label>Informacion</label>
+        <input type="text" value="@dato.Informacion" readonly />
+
+    }*@
+@if (Model != null && Model.Any())
+{
+    <h3>Lista de Medios de Contacto</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Medio de Contacto</th>
+                <th>Información</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Intermedio dato in Model)
+            {
+                <tr>
+                    <td>@dato.MediosDeContacto</td>
+                    <td>@dato.informacion</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No hay medios de contacto registrados.</p>
+}

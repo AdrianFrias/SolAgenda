@@ -1,0 +1,22 @@
+﻿@model DataAgenda.Modelo.Intermedio
+@{
+    ViewBag.Title = "VistaEditarIntermedio";
+}
+
+<h2>VistaEditarIntermedio</h2>
+
+<form action="/Contacto/ActualizarIntermdeio" method="post">
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <input type="hidden" name="ContactoId" value="@Model.ContactoId" />
+    <div class="form-group">
+        @Html.LabelFor(model => model.MediosDeContactoId, "MediosDeContactoId", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("MediosDeContactoId", new SelectList(ViewBag.CatalogoMediosContacto, "Id", "Nombre"), htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.MediosDeContactoId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <label>Nueva informacion</label>
+    @Html.TextBox("informacion", Model.informacion, new { @class = "form-control", required = "required" })
+    <input type="submit" value="Actualizar informacion" />
+</form>

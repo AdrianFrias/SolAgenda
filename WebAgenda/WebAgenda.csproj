@@ -166,11 +166,13 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Contacto\Index.cshtml" />
-    <Content Include="Views\Usuario\VistaAgregar.cshtml" />
-    <Content Include="Views\Usuario\AgregarUsuario2.cshtml" />
+    <Content Include="Views\Usuario\VistaAgregarUsuario.cshtml" />
     <Content Include="Views\Contacto\VistaAgregarContacto.cshtml" />
-    <Content Include="Views\Contacto\VistaCreateContacto.cshtml" />
     <Content Include="Views\Contacto\VistaDatosContacto.cshtml" />
+    <Content Include="Views\Contacto\VistaEditarContacto.cshtml" />
+    <Content Include="Views\Contacto\VistaEditarMediosContacto.cshtml" />
+    <Content Include="Views\Contacto\VistaEditarIntermedio.cshtml" />
+    <Content Include="Views\Contacto\MediosContacto.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

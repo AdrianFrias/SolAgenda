@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace DataAgenda.Modelo
 {
-    [MetadataType(typeof(Atributos))]
     public partial class Usuario
     {
         [Display(Name = "Confirmar Contraseña")]

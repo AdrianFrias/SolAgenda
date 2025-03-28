@@ -1,0 +1,18 @@
+﻿@model DataAgenda.Modelo.Intermedio
+
+@{
+    ViewBag.Title = "VistaEditarMediosContacto";
+}
+
+<h2>VistaEditarMediosContacto</h2>
+
+<form>
+    @Html.DropDownList("MediosDeContactoId", new SelectList(ViewBag.CatalogoMediosContacto, "Id", "Nombre",Model.MediosDeContactoId), htmlAttributes: new { @class = "form-control" })
+    @Html.TextBox("informacion", Model.informacion, new { @class = "form-control", required = "required" })
+
+</form>
+
+<div>
+    @Html.ActionLink("Inicio", "Index")
+    
+</div>

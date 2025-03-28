@@ -1,4 +1,5 @@
 ﻿@using DataAgenda.Modelo
+@{Usuario usu = (Usuario)Session["Usuario"]; }
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +20,7 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/Usuario/Login">Home</a>
+                        <a class="nav-link active" aria-current="page" href="/Usuario/CerrarSesion">Cerrar Sesion</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Features</a>
@@ -41,7 +42,19 @@
             </div>
         </div>
     </nav>
-
+    <h3>Hola @usu.Nombres @usu.Paterno</h3>
+    @if (TempData["error"] != null)
+    {
+        <h3 class="alert alert-danger">
+            @TempData["error"]
+        </h3>
+    }
+    @if (TempData["mensaje"] != null)
+    {
+        <h3 class="alert alert-success">
+            @TempData["mensaje"]
+        </h3>
+    }
     <div class="container body-content">
         @RenderBody()
         <hr />

@@ -1,4 +1,5 @@
-﻿@model DataAgenda.Modelo.Intermedio
+﻿@using DataAgenda.Modelo
+@model DataAgenda.Modelo.Intermedio
 
 @{
     ViewBag.Title = "View";
@@ -35,10 +36,31 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-success" />
             </div>
         </div>
     </div>
+    <table class="table table-striped table-hover table-bordered text-center" >
+        <thead>
+            <tr>
+                <th>Red social</th>
+                <th>Usuario</th>
+                <th colspan="2">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Intermedio inter in ViewBag.ListaIntermedio)
+            {
+                <tr>
+                    <td>@inter.MediosDeContacto.Nombre</td>
+                    <td>@inter.informacion</td>
+                    <td><a href="~/Contacto/IntermedioEliminar/?ID=@inter.Id" class="btn btn-danger">Eliminar</a></td>
+                    <td><a href="~/Contacto/VistaIntermedioEditar/?ID=@inter.Id" class="btn btn-primary">Editar</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
 }
 
 <div>

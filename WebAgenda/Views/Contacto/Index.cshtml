@@ -3,43 +3,67 @@
 @{
     ViewBag.Title = "Index";
 }
-<img src="~/FotosUsuarios/ViewBag.FotoUsuario" width="170" style="float:right">
+<img src="~/FotosUsuarios/@ViewBag.FotoUsuario" width="120" style="float:right">
 
-<a href="/Contacto/IrCrearContacto">Crear nuevo contacto</a>
+<a href="/Contacto/VistaCrearContacto">Crear nuevo contacto</a>
 
 <h2 style="text-align:center">Tus contactos</h2>
+
 Tienes @Model.Count contactos almacenados
-<br />
-Buscador
-<br />
-<br />
+
+<form method="get" action="/Contacto/BuscarNombre">
+    <input class="form-control" name="Buscador" placeholder="Nombre" />
+    <input type="submit" value="Buscar" class="btn btn-dark">
+</form>
+
 <hr />
-
-@foreach (Contacto contacto in Model)
-{
-
-    <div class="mb-3 col-4">
-        <div class="card">
-            <div class="row">
-                <!-- Columna de la imagen -->
-                <div class="col-5">
-                    <img src="~/FotosContactos/@contacto.Foto" style="height:170px; width:170px" />
-                </div>
-                <!-- Columna del texto -->
-                <div class="col-7">
-                    <div class="card-body">
-                        <p>Nombre:@contacto.Nombre @contacto.ApPaterno @contacto.ApMaterno</p>
-                        <p>Edad:@contacto.Edad</p>
-                        @foreach (Intermedio intermedio in contacto.Intermedio)
-                        {
-                            <p>@intermedio.MediosDeContacto.Nombre: @intermedio.informacion</p>
-                        }
+<table>
+    <tbody>
+        @foreach (Contacto contacto in Model)
+        {
+            <tr>
+                <td style="width: 190px;">
+                    <div>
+                        <img src="~/FotosContactos/@contacto.Foto" style="height:170px; width:170px" />
                     </div>
-                </div>
-            </div>
-        </div>
+                </td>
+                <td style="width: 250px;">
+                    <div>
+                        <div class="card-body">
+                            <p>Nombre: @contacto.Nombre @contacto.ApPaterno @contacto.ApMaterno</p>
+                            @{
+                                DateTime fechaNacimiento = DateTime.Parse(contacto.Edad);
+                                int edad = DateTime.Today.Year - fechaNacimiento.Year;
 
-    </div>
-    <hr />
-}
+                                if (DateTime.Today < fechaNacimiento.AddYears(edad))
+                                {
+                                    edad--;
+                                }
+                            }
+                            @*<p>Edad: @(DateTime.Today- DateTime.Parse(contacto.Edad))</p>*@
+                            <p>Edad: @(edad)</p>
+                            @foreach (Intermedio intermedio in contacto.Intermedio)
+                            {
+                                <p>@intermedio.MediosDeContacto.Nombre: @intermedio.informacion</p>
+                            }
+                        </div>
+                    </div>
+                </td>
+                <td style="width: 100px;">
+                    @if (fechaNacimiento.Day == DateTime.Today.Day && fechaNacimiento.Month == DateTime.Today.Month)
+                    {
+                        <div>
+                            <img src="~/FotosContactos/cake.png" style="height:100px; width:100px" />
+                        </div>
+                    }
+
+                </td>
+                <td style="width: 80px; text-align:center"><a href="/Contacto/VistaActualizarContacto/?ID=@contacto.Id" class="btn btn-primary">Editar</a></td>
+                <td style="width: 100px; text-align: center"><a href="/Contacto/EliminarContacto/?ID=@contacto.Id" class="btn btn-danger">Eliminar</a></td>
+                <td style="width: 190px; text-align: center"><a href="/Contacto/VistaActualizarMedioContacto/?ID=@contacto.Id" class="btn btn-secondary">Editar Medio Contacto</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
 

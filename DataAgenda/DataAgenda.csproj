@@ -50,7 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClasesExt\UsuarioExt.cs" />
+    <Compile Include="ClasesExt\ContactoExt.cs" />
+    <Compile Include="ClasesExt\Usuario.cs" />
     <Compile Include="DatContacto.cs" />
     <Compile Include="DatIntermedio.cs" />
     <Compile Include="DatMedioContacto.cs" />

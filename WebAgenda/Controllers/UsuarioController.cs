@@ -23,6 +23,7 @@ namespace WebAgenda.Controllers
             try
             {
                 Usuario us = neg.ValidarUsuarioContraseña(user);
+
                 Session["Usuario"] = us;
             
                 return RedirectToAction("Index","Contacto");
@@ -33,17 +34,29 @@ namespace WebAgenda.Controllers
                 return View("Login");
             }
         }
+        public ActionResult CerrarSesion()
+        {
+            Session["Usuario"] = null;
+            return View("Login");
+        }
         public ActionResult VistaUsuario(Usuario user)
         {
-            return View("AgregarUsuario2");
+            return View("VistaAgregarUsuario");
         }
         public ActionResult AgregarUsuario(Usuario user, HttpPostedFileBase FileFoto)
         {
             try
             {
-                string rutaArchivo = Path.Combine(Server.MapPath("~/FotosUsuarios"), FileFoto.FileName);
-                FileFoto.SaveAs(rutaArchivo);
-                user.Foto = FileFoto.FileName;
+                if (FileFoto == null)
+                {
+                    user.Foto = "default.png";
+                }
+                else
+                {
+                    string rutaArchivo = Path.Combine(Server.MapPath("~/FotosContactos"), FileFoto.FileName);
+                    FileFoto.SaveAs(rutaArchivo);
+                    user.Foto = FileFoto.FileName;
+                }
                 neg.AgregarUsuario(user);
                 TempData["mensaje"] = $"Usuario {user.NickName} Agregado correctamente";
                 return View("Login");
@@ -51,26 +64,11 @@ namespace WebAgenda.Controllers
             catch (Exception ex)
             {
                 TempData["error"] = $"{ex.Message}";
-                return View("AgregarUsuario2");
+                return View("VistaAgregarUsuario");
                 
             }
         }
-        public ActionResult AgregarUsuario2(Usuario user, HttpPostedFileBase FileFoto)
-        {
-            try
-            {
-                string rutaArchivo = Path.Combine(Server.MapPath("~/FotosUsuarios"), FileFoto.FileName);
-                FileFoto.SaveAs(rutaArchivo);
-                user.Foto = FileFoto.FileName;
-                neg.AgregarUsuario(user);
-                TempData["mensaje"] = $"Usuario {user.NickName} Agregado correctamente";
-                return View("Login");
-            }
-            catch (Exception ex)
-            {
-                TempData["error"] = $"{ex.Message}";
-                return View("VistaAgregar");
-            }
-        }
+        //------------------------------------------------
+        
     }
 }

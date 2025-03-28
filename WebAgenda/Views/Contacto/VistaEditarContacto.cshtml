@@ -1,0 +1,43 @@
+﻿@model DataAgenda.Modelo.Contacto
+
+@{
+    ViewBag.Title = "VistaEditarContacto";
+}
+
+<h2>VistaEditarContacto</h2>
+
+
+<form action="/Contacto/EditarContacto" method="post" enctype="multipart/form-data">
+
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <input type="hidden" name="UsuarioId" value="@Model.UsuarioId" />
+
+    <label>Nombre</label>
+    @Html.TextBox("Nombre", Model.Nombre, new { @class = "form-control", required = "required" })
+    <br />
+
+    <label>Apellido Paterno</label>
+    @Html.TextBox("ApPaterno", Model.ApPaterno, new { @class = "form-control", required = "required" })
+    <br />
+
+    <label>Apellido Materno</label>
+    @Html.TextBox("ApMaterno", Model.ApMaterno, new { @class = "form-control", required = "required" })
+    <br />
+
+    <label>Edad</label>
+    @Html.TextBox("Edad", Model.Edad, new { @class = "form-control", required = "required", Type = "date" })
+    <br />
+
+    <img src="~/FotosContactos/@Model.Foto" alt="Imagen actual" style="height: 170px;" />
+    <input type="hidden" name="Foto" value="@Model.Foto" />
+
+    <br />
+    <label>Seleccionar nueva imagen:</label>
+    <input type="file" name="FileFoto" class="form-control" />
+    <br />
+    <input type="submit" value="Actualizar" class="btn btn-success"/>
+</form>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
